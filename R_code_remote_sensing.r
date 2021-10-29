@@ -47,6 +47,7 @@ plot(l2011, col=cl)
 
 # match the bands with the RGB - RedGreenBlue components of computer
 # this is a natural color image -> how human eye perceave it
+# strecht to make the image more large and clear
 plotRGB(l2011, r=3, g=2, b=1, stretch="Lin")
 
 
