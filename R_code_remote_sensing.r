@@ -41,6 +41,14 @@ plot(l2011)
 # B2 is the reflectance in the green band
 # B3 is the reflectance in the red band
 
+# we have to put the c because it's an array, and " for colors
+cl <- colorRampPalette(c("black", "grey", "light grey"))(100)
+plot(l2011, col=cl)
+
+# match the bands with the RGB - RedGreenBlue components of computer
+# this is a natural color image -> how human eye perceave it
+plotRGB(l2011, r=3, g=2, b=1, stretch="Lin")
+
 
 
 
