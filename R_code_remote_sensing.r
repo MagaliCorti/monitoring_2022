@@ -53,3 +53,39 @@ plotRGB(l2011, r=3, g=2, b=1, stretch="Lin")
 
 
 
+# 05/11/2021
+
+# band 1 of blue -> B1_sre (band one sperctrum reflectance)
+# band 2 of green -> B2_sre (band one sperctrum reflectance)
+# band 3 of red -> B3_sre
+# band 4 of NIR -> B4_sre
+
+# link the green band to l2011 and plot it
+plot(l2011$B2_sre)
+
+cl <- colorRampPalette(c("black", "grey", "light grey"))(100) # 100 number of color from black to light grey
+plot(l2011$B2_sre, col=cl)
+
+clg <- colorRampPalette(c("dark green", "green", "light green"))(100)
+plot(l2011$B2_sre, col=clg)
+# max absorb dark green (min reflectance) vs max reflectance light green
+
+clb <- colorRampPalette(c("dark blue", "blue", "light blue"))(100)
+plot(l2011$B1_sre, col=clb)
+
+clr <- colorRampPalette(c("dark red", "red", "pink"))(100)
+plot(l2011$B3_sre, col=clr)
+
+# to plot two or more images in just one multiframe graph
+# plot graph with 1 row and 3 column
+par(mfrow=c(1,3)) 
+plot(l2011$B1_sre, col=clb)
+plot(l2011$B2_sre, col=clg)
+plot(l2011$B3_sre, col=clr)
+# plot graph with 3 row and 1 column
+par(mfrow=c(3,1))
+plot(l2011$B1_sre, col=clb)
+plot(l2011$B2_sre, col=clg)
+plot(l2011$B3_sre, col=clr)
+
+
