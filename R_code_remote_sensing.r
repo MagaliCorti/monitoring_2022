@@ -134,7 +134,7 @@ plotRGB(l2011, r=4, g=3, b=2, stretch="Lin") # false colors
 # vegetation red because we put NIR as first component
 plotRGB(l2011, r=3, g=4, b=2, stretch="Lin")
 # thanks to this vision we can clearly see the different umiidity of forest
-plotRGB(l2011, r=2, g=3, b=4, stretch="Lin")
+plotRGB(l2011, r=3, g=2, b=4, stretch="Lin")
 # we can clearly see bare soil (forest cut to make space to agriculture)
 par(mfrow=c(2,2)) 
 plotRGB(l2011, r=3, g=2, b=1, stretch="Lin")
