@@ -145,3 +145,38 @@ plotRGB(l2011, r=3, g=2, b=4, stretch="Lin")
 
 
 
+
+# 12/11/2021
+
+# final day on tropical forest data
+# every time open raster package and set working directory
+library(raster)
+setwd("/Users/magalicorti/Desktop/lab/")
+
+# brick to import data from external folder
+brick("p224r63_2011.grd")
+l2011 <- brick("p224r63_2011.grd")
+brick("p224r63_1988.grd")
+l1988 <- brick("p224r63_1988.grd")
+
+# stretch function -> range of reflectance from 0 to 1
+# but non necesserally our data 0-1, could be 0,4 - 0,6
+# with stretch we transform 0,4 in 0 and 0,6 in 1 -> see better color and high quality immage
+# Lin = linear type of stretching
+plotRGB(l2011, r=4, g=3, b=2, stretch="Lin")
+# histogram stretching -> enhances differences bw one place to the other, more humidity, agricultural areas
+plotRGB(l2011, r=4, g=3, b=2, stretch="Hist")
+
+# plot multiframe table with 2 rows and 1 column
+par(mfrow=c(2,1))
+plotRGB(l1988, r=4, g=3, b=2, stretch="Lin")
+plotRGB(l2011, r=4, g=3, b=2, stretch="Lin")
+
+# put NIR in the blue channel
+par(mfrow=c(2,1))
+plotRGB(l1988, r=3, g=2, b=4, stretch="Lin")
+plotRGB(l2011, r=3, g=2, b=4, stretch="Lin")
+
+
+
+
