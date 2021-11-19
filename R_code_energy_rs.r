@@ -17,3 +17,7 @@ plotRGB(l1992, r=1, g=2, b=3, stretch="Lin") # water would be black, it's not (i
 # defor1_.3 = green
 plotRGB(l1992, r=2, g=1, b=3, stretch="Lin")
 plotRGB(l1992, r=3, g=2, b=1, stretch="Lin") # we don't see a lot of bare soil (would appear yellow)
+
+
+
+
