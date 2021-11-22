@@ -23,7 +23,7 @@ plotRGB(l1992, r=3, g=2, b=1, stretch="Lin") # we don't see a lot of bare soil (
 
 
 
-# 19/11/2021
+# 22/11/2021
 
 library(raster)
 library(rgdal)
