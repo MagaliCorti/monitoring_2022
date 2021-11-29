@@ -80,3 +80,46 @@ plotRGB(en, r=1, g=7, b=13, stretch="Lin")
 
 
 
+
+# 29/11/2021
+
+library(raster)
+setwd("/Users/magalicorti/Desktop/lab/en/")
+
+# importing data all together with lapply function
+# our list -> all the files with "EN" in the name (same pattern)
+rlist <- list.files(pattern = "EN")
+rlist
+
+# l apply to apply a specific function to a chosen argument -> apply raster function to rlist
+# lapply(x, FUN)
+list_rast <- lapply(rlist, raster)
+list_rast
+
+# stack to put all file imported together
+EN_stack <- stack(list_rast)
+
+# we can plot all together the images (with colorRampPalette)
+cl = colorRampPalette(c("red", "orange", "yellow"))(100)
+plot(EN_stack, col=cl)
+
+# plot only 1st imagage of stack
+plot(EN_stack$EN_0001, col=cl)
+
+# difference bw final and first images
+ENdif <- (EN_stack$EN_0001 - EN_stack$EN_0013)
+# higest variability in red vs lowest in blue
+cldif = colorRampPalette(c("blue", "white", "red"))(100)
+plot(ENdif, col=cldif)
+
+# automaded processing source function
+# to directly open code saved on the computer on whatever text editor file
+source("r_code_automatic_scrypt.r")
+
+
+
+
+
+
+
+
