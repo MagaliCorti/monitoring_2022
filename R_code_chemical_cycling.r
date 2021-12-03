@@ -117,9 +117,3 @@ plot(ENdif, col=cldif)
 source("r_code_automatic_scrypt.r")
 
 
-
-
-
-
-
-
