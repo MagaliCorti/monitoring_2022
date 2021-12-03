@@ -62,7 +62,9 @@ proportion1992 # quantitative data
 
 # plotting data with ggplot2
 # ggplot function -> first argument = dataset, other arguments = aesthetic, color stored in cover
-ggplot(proportion1992, aes(x=cover, y=prop1992, color=cover))
+# geom_bar function explainig type of graph
+# stat - statistics used, identity bc we're using data as they are (no median or mean)
+ggplot(proportion1992, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="identity", fill="white")
 
 
 
