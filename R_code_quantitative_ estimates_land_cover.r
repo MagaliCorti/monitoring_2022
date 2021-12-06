@@ -4,9 +4,9 @@
 
 setwd("/Users/magalicorti/Desktop/lab/")
 library(raster)
-library(ggplot2)
-library(gridExtra)
-library (RStoolbox) # tools for remote sensing data analysis
+library(ggplot2) 
+library(gridExtra) 
+library (RStoolbox) # tools for remote sensing data analysis -> to make the classification
 
 # brick to import every layer of every image (brick import all layer of an image together)
 # to import a lot of images -> lapply function
@@ -65,6 +65,96 @@ proportion1992 # quantitative data
 # geom_bar function explainig type of graph
 # stat - statistics used, identity bc we're using data as they are (no median or mean)
 ggplot(proportion1992, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="identity", fill="white")
+
+
+
+
+# 06/12/2021
+
+setwd("/Users/magalicorti/Desktop/lab/")
+library(raster)
+library(ggplot2)    # to use ggplot function
+library(gridExtra)  # to put several ggplot in a multiframe
+library (RStoolbox) # to make classification
+
+# creating a list with all images and importing them applying funct brick over the list (import images with all layers)
+rlist <- list.files(pattern = "defor")
+rlist
+list_rast <- lapply(rlist, brick)
+list_rast
+
+# plotting single image with 3 diff layers
+plot(list_rast[[1]])
+plot(list_rast[[2]])
+
+# plotting first image in RGB space with NIR=1, red=2, green=3
+plotRGB(list_rast[[1]], r=1, g=2, b=3, stretch = "Lin")
+l1992 <- list_rast[[1]]
+plotRGB(l1992, r=1, g=2, b=3, stretch = "Lin")
+# plotting second image
+l2006 <- list_rast[[2]]
+plotRGB(l2006, r=1, g=2, b=3, stretch = "Lin")
+
+# estimate amount of forest destroied
+# unsupervied classification -> take the pixels and look if there are meaningful groups
+# unsuperClass function (x, nClasses)
+l1992c <- unsuperClass(l1992, nClasses=2)
+l1992c # only 2 values -> one forest and one agricultural land
+# passed from a raster brick (multilayer) to a raster layer -> all layer together in a single raster layer
+# passeing from situa where 3 layers each with values 0-255 -> one layer with 2 values (1 & 2)
+freq(l1992c$map)
+# agricuktural land + water = 36313 (class 2)
+# forest = 304979 (class 1)
+total <- 341292 # tot amount of pixels -> run l1992c -> look at tird value of dimension (ncell)
+# compute percentage of different land uses
+propagri <- 36313/total
+propforest <- 304979/total
+propagri    # 0.1063986 -> 11%
+propforest  # 0.8936014 -> 89%
+# building a dataframe with type of cover and proportion of pixels
+cover <- c("Forest", "Agriculture")
+prop1992 <- c(0.8936014, 0.1063986)
+proportion1992 <- data.frame(cover, prop1992) # proportion of pixels in 1992
+proportion1992 # quantitative data
+# plotting data with ggplot2
+# ggplot function -> first argument = dataset, other arguments = aesthetic, color stored in cover
+# geom_bar function explainig type of graph
+p1 <- ggplot(proportion1992, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="identity", fill="white") + ylim(0,1)
+# to change limit from 0 to 1 -> add to ggplot "+ ylim(0,1)"
+
+# second image
+l2006c <- unsuperClass(l2006, nClasses=2)
+l2006c
+plot(l2006c$map)
+freq(l2006c$map) # frequences of our map
+# class 1 (white) -> forest -> 163566
+# class 2 (green) -> agrucultural and water -> 179160
+tot06 <- 342726
+
+propagri06 <- 179160/tot06
+propforest06 <- 163566/tot06
+propagri06    # 0.52275 -> 52%
+propforest06  # 0.47725 -> 48%
+
+# building a dataframe with type of cover and proportion of pixels
+cover <- c("Forest", "Agriculture")
+prop2006 <- c(propforest06, propagri06)
+proportion2006 <- data.frame(cover, prop2006) # proportion of pixels in 1992
+proportion2006 # quantitative data
+
+# plotting data with ggplot2
+# ggplot function -> first argument = dataset, other arguments = aesthetic, color stored in cover
+# geom_bar function explainig type of graph
+# stat - statistics used, identity bc we're using data as they are (no median or mean)
+p2 <- ggplot(proportion2006, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white")+ ylim(0,1)
+
+proportion <- data.frame(cover, prop1992, prop2006)
+proportion
+
+# plotting the 2 graph together
+grid.arrange(p1, p2, nrow=1)
+
+
 
 
 
