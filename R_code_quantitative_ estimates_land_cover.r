@@ -154,6 +154,51 @@ proportion
 # plotting the 2 graph together
 grid.arrange(p1, p2, nrow=1)
 
+# plotting with patchwork package
+library(patchwork)
+p1 + p2  # plottin graphs in 1 row
+p1 / p2  # plottin graphs in 1 column
+
+# patchwork works with raster data but they should be plotted with ggplot
+
+
+
+# 13/12/2021
+
+setwd("/Users/magalicorti/Desktop/lab/")
+library(raster)
+library(ggplot2) 
+library(gridExtra) 
+library (RStoolbox)
+library(patchwork)
+
+# using ggRGB instead of plotRGB
+plotRGB(l1992, r=1, g=2, b=3, stretch="lin")
+ggRGB(l1992, r=1, g=2, b=3)
+# playing with stretch function
+ggRGB(l1992, r=1, g=2, b=3, stretch="lin")
+ggRGB(l1992, r=1, g=2, b=3, stretch="hist")  # see things not visible at human eyes -> not a photo but a scan by satellite
+ggRGB(l1992, r=1, g=2, b=3, stretch="sqrt")  # compacting the data -> to remove extreme data use square root or persantage
+ggRGB(l1992, r=1, g=2, b=3, stretch="log")   # compacting the data
+
+# square root or persantage not use if you want to stress gravity of events
+log(100) # in R log not in base 10 but base 2
+
+# patchwork
+gp1 <- ggRGB(l1992, r=1, g=2, b=3, stretch="lin")
+gp2 <-ggRGB(l1992, r=1, g=2, b=3, stretch="hist") 
+gp3 <- ggRGB(l1992, r=1, g=2, b=3, stretch="sqrt")  
+gp4 <- ggRGB(l1992, r=1, g=2, b=3, stretch="log")
+
+gp1 + gp2 + gp3 + gp4
+
+# multitemporal patchwork -> plotting together data about 1992 & 2006
+l2006 <- list_rast[[2]]
+gp1 <- ggRGB(l1992, r=1, g=2, b=3)
+gp5 <- ggRGB(l2006, r=1, g=2, b=3) 
+gp1 + gp5
+gp1 / gp5
+
 
 
 
