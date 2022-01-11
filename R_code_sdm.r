@@ -94,6 +94,19 @@ plot(preds$precipitation, col=cl)
 points(presences, pch=19) # intermediate precipitation
 
 
+# 11/01/2022
+
+setwd("/Users/magalicorti/Desktop/lab/")
+
+source("R_code_source_sdm.r")
+preds # stack of the predictors
+
+# expalining to the model what are the training and the predictors
+datasdm <- sdmData(train = species, predictors = preds )
+
+# making sdm model - lm = linear model
+m1 <- sdm(formula = Occurrence ~ temperature + elevation + precipitation + vegetation, data = datasdm, methods = "glm")
+
 
 
 
