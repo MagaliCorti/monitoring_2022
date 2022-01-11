@@ -101,7 +101,7 @@ setwd("/Users/magalicorti/Desktop/lab/")
 source("R_code_source_sdm.r")
 preds # stack of the predictors
 
-# expalining to the model what are the training and the predictors
+# explaining to the model what are the training and the predictors
 datasdm <- sdmData(train = species, predictors = preds )
 
 # making sdm model - lm = linear model
