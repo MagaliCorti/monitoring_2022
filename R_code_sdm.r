@@ -104,9 +104,29 @@ preds # stack of the predictors
 # explaining to the model what are the training and the predictors
 datasdm <- sdmData(train = species, predictors = preds )
 
-# making sdm model - lm = linear model
+# making sdm model - glm = generalized linear model
+# y = a0 + b0x0 + a1 + b1x1 + .... + an + bnxn
+# linear model to obtain final spread prediction of the spp over an area -> compute probabily to find spp in a spot where there are neighter presences nor absences
 m1 <- sdm(formula = Occurrence ~ temperature + elevation + precipitation + vegetation, data = datasdm, methods = "glm")
 
+# 12/01/2022
+
+# apply formula to each single predictor to find probability
+# prediction: map probability
+p1 <- predict(m1, newdata = preds)
+p1 # prediction is a raster layer
+
+# plotting model + presences (check visually if it's good)
+plot(p1, col=cl)
+points(presences, pch=18)
+
+# stacking all together
+s1 <- stack(preds, p1)
+plot(s1, col=cl)
+
+# changing names of dataset and plotting it again
+names(s1) <- c("Elevation", "Precipitation", "Temperature", "Vegetation", "Model")
+plot(s1, col=cl)
 
 
 
