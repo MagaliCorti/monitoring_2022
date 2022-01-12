@@ -96,8 +96,10 @@ points(presences, pch=19) # intermediate precipitation
 
 # 11/01/2022
 
+# setting working directory
 setwd("/Users/magalicorti/Desktop/lab/")
 
+# recalling source file from lab directory
 source("R_code_source_sdm.r")
 preds # stack of the predictors
 
