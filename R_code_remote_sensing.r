@@ -13,7 +13,7 @@ library(raster)
 
 # 29/10/2021
 
-# go to R and setup the raster packege entering " library(raster) "
+# setup the raster packege entering " library(raster) "
 library(raster)
 
 # download data from virtuale and put it into lab folder
