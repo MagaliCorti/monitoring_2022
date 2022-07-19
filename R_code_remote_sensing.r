@@ -19,7 +19,7 @@ library(raster)
 # download data from virtuale and put it into lab folder
 
 # we are going to use brick function
-# raster brick puts the bands all together --> matrix with different pictures 
+# raster brick puts the bands all together --> matrix with different layers 
 # (if you do not have the raster package intalled you cannot use this function because it's inside raster)
 
 # firstly we have to set the working directory --> telling where the data are
